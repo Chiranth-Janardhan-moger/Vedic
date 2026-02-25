@@ -170,6 +170,10 @@ const BreatheExercisePage = ({
     };
   }, []);
 
+  const isExpanded = phase === "inhale" || phase === "hold1";
+  const phaseDuration = phase === "idle" ? 0 : getPhaseDuration(phase);
+  const transitionDuration = phase === "idle" ? "300ms" : `${phaseDuration * 1000}ms`;
+
   return (
     <div className="min-h-screen max-w-md mx-auto relative flex flex-col warm-gradient">
       <div className="absolute inset-0 hero-gradient pointer-events-none" />
@@ -202,85 +206,42 @@ const BreatheExercisePage = ({
 
         {/* Circle */}
         <div className="relative flex items-center justify-center mb-16">
-          {/* Outer ripple glow effects - always render but start from center */}
+        {/* Ripple rings */}
           <div
-            className={`absolute rounded-full bg-primary/5 transition-all ease-in-out ${
-              isActive && (phase === "inhale" || phase === "hold1")
-                ? "w-72 h-72 opacity-100"
-                : "w-40 h-40 opacity-0"
-            }`}
+            className="absolute w-56 h-56 rounded-full border border-primary/10 ease-in-out"
             style={{
-              transitionDuration: `${
-                phase === "inhale"
-                  ? exercise.inhale * 1000
-                  : phase === "exhale"
-                  ? exercise.exhale * 1000
-                  : phase === "hold1"
-                  ? exercise.hold1 * 1000
-                  : exercise.hold2 * 1000
-              }ms`,
+              transform: isExpanded ? "scale(1.8)" : "scale(1)",
+              opacity: isExpanded ? 0.3 : 0.1,
+              transitionProperty: "transform, opacity",
+              transitionDuration,
+              transitionTimingFunction: "ease-in-out",
             }}
           />
           <div
-            className={`absolute rounded-full bg-primary/10 transition-all ease-in-out ${
-              isActive && (phase === "inhale" || phase === "hold1")
-                ? "w-60 h-60 opacity-100"
-                : "w-40 h-40 opacity-0"
-            }`}
+            className="absolute w-48 h-48 rounded-full border-2 border-primary/30 ease-in-out"
             style={{
-              transitionDuration: `${
-                phase === "inhale"
-                  ? exercise.inhale * 1000
-                  : phase === "exhale"
-                  ? exercise.exhale * 1000
-                  : phase === "hold1"
-                  ? exercise.hold1 * 1000
-                  : exercise.hold2 * 1000
-              }ms`,
+              transform: isExpanded ? "scale(1.6)" : "scale(1)",
+              boxShadow: isExpanded
+                ? "0 0 60px 20px hsl(24 80% 52% / 0.3)"
+                : "0 0 30px 10px hsl(24 80% 52% / 0.1)",
+              transitionProperty: "transform, box-shadow",
+              transitionDuration,
+              transitionTimingFunction: "ease-in-out",
             }}
           />
           <div
-            className={`absolute rounded-full bg-primary/15 transition-all ease-in-out ${
-              isActive && (phase === "inhale" || phase === "hold1")
-                ? "w-48 h-48 opacity-100"
-                : "w-40 h-40 opacity-0"
-            }`}
+            className="absolute w-40 h-40 rounded-full border border-primary/15 ease-in-out"
             style={{
-              transitionDuration: `${
-                phase === "inhale"
-                  ? exercise.inhale * 1000
-                  : phase === "exhale"
-                  ? exercise.exhale * 1000
-                  : phase === "hold1"
-                  ? exercise.hold1 * 1000
-                  : exercise.hold2 * 1000
-              }ms`,
+              transform: isExpanded ? "scale(1.4)" : "scale(1)",
+              transitionProperty: "transform",
+              transitionDuration,
+              transitionTimingFunction: "ease-in-out",
             }}
           />
-          
-          {/* Main circle - stays same size, only glow changes */}
+          {/* Inner circle */}
           <button
             onClick={startBreathing}
-            className={`w-40 h-40 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary/30 flex flex-col items-center justify-center relative z-10 transition-all ease-in-out ${
-              !isActive
-                ? "hover:scale-105 active:scale-95 duration-300 shadow-[0_0_20px_5px_hsl(24_80%_52%/0.1)]"
-                : phase === "inhale" || phase === "hold1"
-                ? "shadow-[0_0_80px_30px_hsl(24_80%_52%/0.5)]"
-                : "shadow-[0_0_30px_10px_hsl(24_80%_52%/0.15)]"
-            }`}
-            style={{
-              transitionDuration: isActive
-                ? `${
-                    phase === "inhale"
-                      ? exercise.inhale * 1000
-                      : phase === "exhale"
-                      ? exercise.exhale * 1000
-                      : phase === "hold1"
-                      ? exercise.hold1 * 1000
-                      : exercise.hold2 * 1000
-                  }ms`
-                : "300ms",
-            }}
+            className="w-32 h-32 rounded-full bg-primary/10 border border-primary/20 flex flex-col items-center justify-center relative z-10 hover:scale-105 active:scale-95 transition-transform duration-300"
           >
             <span className="font-display text-lg font-bold text-primary">
               {isActive ? timer : ""}

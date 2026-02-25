@@ -13,7 +13,7 @@ const BottomNav = () => {
   const location = useLocation();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50">
+    <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-50 lg:hidden">
       <div className="mx-4 mb-4 rounded-3xl card-gradient shadow-glow border border-border/20 px-2 py-2 backdrop-blur-md">
         <div className="flex justify-around">
           {tabs.map((tab, i) => {

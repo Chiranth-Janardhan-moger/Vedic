@@ -1,8 +1,9 @@
 import { BookOpen, MessageCircle, Play, Heart, Edit3, Quote, Headphones, Compass } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import BottomNav from "@/components/BottomNav";
-import { Link } from "react-router-dom";
 
 const Explore = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen max-w-md mx-auto relative overflow-x-hidden scrollbar-hide warm-gradient">
       <div className="absolute inset-0 hero-gradient pointer-events-none" />
@@ -21,27 +22,23 @@ const Explore = () => {
         </div>
 
         {/* Reading Card */}
-       <Link to="/reading" className="block px-6 mt-6 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
-  <div className="card-gradient rounded-3xl p-5 shadow-glow border border-border/20 flex gap-4 hover:scale-[1.02] transition">
-    <div className="flex-1">
-      <div className="flex items-center gap-1.5 mb-2">
-        <BookOpen className="w-3.5 h-3.5 text-primary" strokeWidth={2} />
-        <span className="text-[10px] font-body font-semibold text-primary tracking-widest-custom uppercase">
-          Reading
-        </span>
-      </div>
-      <h3 className="font-display text-lg font-bold text-foreground leading-snug">
-        The Inner Light
-      </h3>
-      <p className="text-xs font-body text-muted-foreground mt-1">
-        Chapter 4: Stillness
-      </p>
-    </div>
-    <div className="w-20 h-20 rounded-2xl bg-primary/10 overflow-hidden flex items-center justify-center">
-      <span className="text-3xl">📖</span>
-    </div>
-  </div>
-</Link>
+        <div className="px-6 mt-6 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
+          <div onClick={() => navigate("/reading")} className="card-gradient rounded-3xl p-5 shadow-glow border border-border/20 flex gap-4 cursor-pointer hover:shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all duration-300">
+            <div className="flex-1">
+              <div className="flex items-center gap-1.5 mb-2">
+                <BookOpen className="w-3.5 h-3.5 text-primary" strokeWidth={2} />
+                <span className="text-[10px] font-body font-semibold text-primary tracking-widest-custom uppercase">
+                  Reading
+                </span>
+              </div>
+              <h3 className="font-display text-lg font-bold text-foreground leading-snug">The Inner Light</h3>
+              <p className="text-xs font-body text-muted-foreground mt-1">Chapter 4: Stillness</p>
+            </div>
+            <div className="w-20 h-20 rounded-2xl bg-primary/10 overflow-hidden flex items-center justify-center">
+              <span className="text-3xl">📖</span>
+            </div>
+          </div>
+        </div>
 
         {/* Daily Mantra */}
         <div className="px-6 mt-4 animate-fade-in-up" style={{ animationDelay: "120ms" }}>

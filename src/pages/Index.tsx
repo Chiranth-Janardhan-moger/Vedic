@@ -6,8 +6,8 @@ import BottomNav from "@/components/BottomNav";
 
 const Home = () => {
   return (
-    <div className="min-h-screen max-w-md mx-auto relative overflow-x-hidden scrollbar-hide warm-gradient">
-      <div className="absolute inset-0 hero-gradient pointer-events-none" />
+    <div className="min-h-screen max-w-md mx-auto relative overflow-x-hidden scrollbar-hide lg:min-h-0 lg:warm-gradient-none">
+      <div className="absolute inset-0 hero-gradient pointer-events-none lg:hidden" />
       <div className="relative z-10">
         <GreetingHeader />
         <DailyInsight />
